@@ -187,10 +187,13 @@ public class Place {
 	public void removeInsect (Ant ant) {
 		if (this.ant == ant) {
 			this.ant=null;
-			if (ant instanceof Containing && ((Containing)ant).getInsect() != null){//si la fourmi a supprimer est une containing et qu'elle contient un insect
-			
-				((Containing)ant).getInsect().setPlace(this);
-			}else{
+			if (ant instanceof Containing){//si la fourmi a supprimer est une containing
+				if(((Containing)ant).getInsect() != null){// et si elle contient un insect
+					((Containing)ant).getInsect().setPlace(this);//On supprime la Containing et on met l'insect contenu a la place
+				}
+			}
+					
+			else{
 				
 				ant.setPlace(null);
 			}
@@ -198,7 +201,7 @@ public class Place {
 					}
 		else {
 			if (this.ant instanceof Containing && ((Containing)this.ant).getInsect()==ant){//si la fourmi surplace est une containning et qu'elle contient l'insect cible (en parametre)
-				((Containing)this.ant).deleteContenantAnt();//on supprime l'insecte cible
+				((Containing)this.ant).deleteContenantInsect();//on supprime l'insecte cible
 			}else{
 				System.out.println(ant + " is not in " + this);//Sinon on affaiche le message d'erreur
 			}

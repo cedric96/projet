@@ -10,7 +10,7 @@ import core.Bee;
  */
 public class HungryAnt extends Ant {
 	protected int damage;
-	protected int time=0;
+	protected int time=3;
 	
 	public HungryAnt(){
 		super(4,1);

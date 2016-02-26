@@ -1,5 +1,7 @@
 package core;
 
+import ants.BodyguardAnt;
+
 /**
  * Represents an insect (e.g., an Ant or a Bee) in the game
  *

@@ -10,7 +10,7 @@ public interface Containing {
 	/*methode pour supprimer  l'insecte (fourmi)
 	 * 
 	 */
-	public boolean deleteContenantAnt();
+	public boolean deleteContenantInsect();
 	
 	/*methode pour obtenir l'insecte contenu
 	 * 
