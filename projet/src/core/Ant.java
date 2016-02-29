@@ -24,7 +24,7 @@ public abstract class Ant extends Insect {
 	public Ant (int food_cost,int armor){
 		super(armor,null);
 		this.foodCost=food_cost;
-		this.bloqueChemin=false;
+		this.bloqueChemin=true;
 
 	}
 	//fin ma partie

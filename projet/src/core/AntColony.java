@@ -161,11 +161,6 @@ public class AntColony {
 		for (Place p : places) {
 			if (p.getAnt() != null) {
 				ants.add(p.getAnt());
-				if(p.getAnt() instanceof Containing){//Si l'insecte present est de type Containing
-					if (((Containing)p.getAnt()).getInsect()!= null){//Si il contient un autre insecte
-						ants.add(((Containing)p.getAnt()).getInsect());//On ajoute l'insecte contenu aussi a la liste des insectes
-					}
-				}
 			}
 		}
 		return ants;

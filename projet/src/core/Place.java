@@ -127,10 +127,9 @@ public class Place {
 		
 		
 		if (this.ant == null) {
-			if (this instanceof Water){//si la place est de leau
-				boolean var=ant.getWatersafe();//on reccupere la variable watersafe de la fourmi
-				if (var==true){//si cette variable est vraie donc elle resiste a leau on la place
-					//System.out.println("This insect can't be here because of Water "); // report error
+			if (this instanceof Water){
+				boolean var=ant.getWatersafe();
+				if (var==true){
 					this.ant = ant;
 					ant.setPlace(this);
 				}else{
@@ -141,29 +140,7 @@ public class Place {
 				ant.setPlace(this);
 			}
 		}else {
-			
-			if (this.ant instanceof Containing){//Si la fourmi presente est une containing
-				if (((Containing)this.ant).addContenantInsect(ant)==false){//Si le Containing ne peut pas contenir la fourmi ant 
-					System.out.println("Already an ant in " + this); // report error
-				}else{
-					((Containing) this.ant).addContenantInsect(ant);//j'ajoute une fourmi dans la fourmi de type containing
-				}
-				
-				((Containing) this.ant).addContenantInsect(ant);//j'ajoute une fourmi dans la fourmi de type containing
-			}else if (ant instanceof Containing){//Si la fourmi a ajouter est une Containing
-				if (((Containing)this.ant).addContenantInsect(ant)==false){
-					System.out.println("Already an ant in " + this); // report error
-				}else{
-					((Containing)ant).addContenantInsect(this.ant);//je mets la fourmi deja presente dans la Containing a ajouter
-					//this.removeInsect(this.ant);//je vide la place en y supprimant la fourmi qui y etait
-					ant.setPlace(this);//J'ajoute a cette plate la Containing qui contient deja la fourmi qui etait sur place
-				}
-				
-			}else if (this.ant instanceof Containing ==false &&  ant instanceof Containing ==false){
-				System.out.println("Already an ant in " + this); // report error
-			}
-			
-				
+			System.out.println("Already an ant in " + this); // report error
 		}
 	}
 
@@ -186,25 +163,11 @@ public class Place {
 	 */
 	public void removeInsect (Ant ant) {
 		if (this.ant == ant) {
-			this.ant=null;
-			if (ant instanceof Containing){//si la fourmi a supprimer est une containing
-				if(((Containing)ant).getInsect() != null){// et si elle contient un insect
-					((Containing)ant).getInsect().setPlace(this);//On supprime la Containing et on met l'insect contenu a la place
-				}
-			}
-					
-			else{
-				
-				ant.setPlace(null);
-			}
-			
-					}
+			this.ant = null;
+			ant.setPlace(null);
+		}
 		else {
-			if (this.ant instanceof Containing && ((Containing)this.ant).getInsect()==ant){//si la fourmi surplace est une containning et qu'elle contient l'insect cible (en parametre)
-				((Containing)this.ant).deleteContenantInsect();//on supprime l'insecte cible
-			}else{
-				System.out.println(ant + " is not in " + this);//Sinon on affaiche le message d'erreur
-			}
+			System.out.println(ant + " is not in " + this);
 		}
 	}
 

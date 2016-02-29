@@ -357,15 +357,6 @@ public class AntGame extends JPanel implements ActionListener, MouseListener {
 
 			Ant ant = place.getAnt();
 			if (ant != null) { // draw the ant if we have one
-				if (ant instanceof Containing){//Si la fourmi a dessiner est une containing
-					if (((Containing)ant).getInsect()!= null){//Si elle contient une fourmi 
-						//On dessine d'abord la fourmi qu'elle contient
-						Image img = ANT_IMAGES.get(((Containing)ant).getInsect().getClass().getName());
-						g2d.drawImage(img, rect.x + PLACE_PADDING.width, rect.y + PLACE_PADDING.height, null);
-					//Ensuite le programme sexecute normalement.La fourmi Containing sera alors dessinee
-					}
-					
-				}
 				Image img = ANT_IMAGES.get(ant.getClass().getName());
 				g2d.drawImage(img, rect.x + PLACE_PADDING.width, rect.y + PLACE_PADDING.height, null);
 			}
