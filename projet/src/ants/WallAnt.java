@@ -10,7 +10,7 @@ public class WallAnt extends Ant {
 	public WallAnt(){
 		super(4,4);
 	}
-	public void action (AntColony Colonie){
+	public void action (AntColony Colony){
 		
 	}
 }

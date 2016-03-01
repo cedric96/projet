@@ -6,7 +6,7 @@ package core;
 public class AntsVsSomeBees {
 
 	public static void main (String[] args) {
-		AntColony colony = new AntColony(3, 8, 3, 15); // specify the colony ]tunnels, length, moats, food]
+		AntColony colony = new AntColony(3, 8, 3, 25); // specify the colony ]tunnels, length, moats, food]
 		Hive hive = Hive.makeTestHive(); // specify the attackers (the hive)
 		new AntGame(colony, hive); // launch the game
 		

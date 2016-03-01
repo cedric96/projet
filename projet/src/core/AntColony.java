@@ -131,8 +131,12 @@ public class AntColony {
 	 */
 	public void deployAnt (Place place, Ant ant) {
 		if (food >= ant.getFoodCost()) {
-			food -= ant.getFoodCost();
 			place.addInsect(ant);
+			if (place.getAnt()==ant){//j'ai modifié cette fonction pour que la nourriture
+				food -= ant.getFoodCost();//ne soit consommée que lorsque l'insecte est vraiment ajouté
+			}
+			
+			
 		}
 		else {
 			System.out.println("Not enough food remains to place " + ant);
@@ -161,6 +165,13 @@ public class AntColony {
 		for (Place p : places) {
 			if (p.getAnt() != null) {
 				ants.add(p.getAnt());
+				//si l'insecte p.getAnt est une Containing  
+				if (p.getAnt() instanceof Containing  ){
+					if(((Containing)p.getAnt()).getContenantInsect()!=null){//et quil contient un insecte
+						ants.add(((Containing)p.getAnt()).getContenantInsect());//On ajoute cet insecte a la liste
+					}
+					
+				}
 			}
 		}
 		return ants;

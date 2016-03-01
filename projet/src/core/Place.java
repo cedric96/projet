@@ -1,6 +1,7 @@
 package core;
 
 import java.util.ArrayList;
+import ants.BodyguardAnt;
 
 /**
  * Represents a location in the game
@@ -139,8 +140,40 @@ public class Place {
 				this.ant = ant;
 				ant.setPlace(this);
 			}
-		}else {
-			System.out.println("Already an ant in " + this); // report error
+		}else {//si la place nest pas vide
+			if (this.ant instanceof Containing){//si la fourmi presente est une containig
+				if (((Containing)this.ant).addContenantInsect(ant)){//Si la containing peut prendre la non Containing
+					((Containing)this.ant).addContenantInsect(ant);//On lui ajoute notre fourmi
+				}else{//Sinon si la Containing ne peut pas prendre la non Containing
+					System.out.println("Already an ant in " + this); // report error
+				}
+				
+			}
+			else if (ant instanceof Containing){//Si la fourmi a ajouter est une containing
+				if (((Containing)ant).addContenantInsect(this.ant)){//Si la containing peut prendre la non Containing( ne contient aucune fourmi pour l'instant
+					Place place=this;//On memorise la place qu'occupait la non-containing
+					((Containing)ant).addContenantInsect(this.ant);//On  ajoute dans la containing la fourmi presente auparavant
+					//Puisque la containing n'est pas encore placee en y mettant la premiere fourmi  sa place passe a null 
+					this.ant.setPlace(place);//on lui remets cette place
+					//System.out.println("ant= "+ this.ant);
+					this.addInsect(ant);//On ajoute la fourmi Containing qui contient bien l'autre fourmi
+					
+				}else {//Sinon si la Containing ne peut pas prendre la non Containing(contient deja une fourmi
+					if (((Containing)ant).getContenantInsect()==this.ant){//si la fourmi contenue est la meme que celle sur place deja
+						this.ant=ant;//je peux alors placer la containing (et la fourmi qu'elle contient) a cette place
+						ant.setPlace(this);
+					}
+					else{
+						System.out.println("Already an ant in " + this); // report error
+					}
+					
+				}
+				
+			}
+			else{//Si aucune des deux fourmi (a ajouter comme celle deja presente) n'est de type Containing
+				System.out.println("Already an ant in " + this); // report error
+			}
+			
 		}
 	}
 
@@ -162,11 +195,25 @@ public class Place {
 	 *            The ant to remove from the place
 	 */
 	public void removeInsect (Ant ant) {
-		if (this.ant == ant) {
-			this.ant = null;
-			ant.setPlace(null);
-		}
-		else {
+		if (this.ant == ant) {//Si on detecte un insecte 
+			//Si on detecte un insecte il est soit Containing et contient eventuellement un autre ou il est non containing
+			if (ant instanceof Containing){//Si il est containing
+				if (((Containing)this.ant).getContenantInsect()!=null){//on regarde s'il contient quelque chose 
+					Ant temp=((Containing)this.ant).getContenantInsect();//Je crre une variable locale pour memoriser linsecte contenu
+					this.ant=null;//je supprime alors la Containing
+					ant.setPlace(null);
+					this.addInsect(temp);//Puis je rajoute sur la meme place l'insecte contenu
+				}else{//Si la containing ne contient rien
+					this.ant=null;//On la supprime
+					ant.setPlace(null);
+				}
+			}else{//Si cest pas une containing on la supprime
+				this.ant = null;
+				ant.setPlace(null);
+			}
+			
+		
+		}else {
 			System.out.println(ant + " is not in " + this);
 		}
 	}

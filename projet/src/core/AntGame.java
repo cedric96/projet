@@ -186,7 +186,10 @@ public class AntGame extends JPanel implements ActionListener, MouseListener {
 			System.out.println("TURN: " + turn);
 
 			// ants take action!
+			
 			for (Ant ant : colony.getAllAnts()) {
+				
+					
 				if (ant instanceof ThrowerAnt) // if we're a thrower, might need to make a leaf!
 				{
 					Bee target = ((ThrowerAnt) ant).getTarget(); // who we'll throw at (really which square, but works out the same)
@@ -194,7 +197,10 @@ public class AntGame extends JPanel implements ActionListener, MouseListener {
 						createLeaf(ant, target);
 					}
 				}
-				ant.action(colony); // take the action (actually completes the throw now)
+				System.out.println("Colony="+colony);
+					ant.action(colony); // take the action (actually completes the throw now)
+				
+				
 			}
 
 			// bees take action!
@@ -357,6 +363,13 @@ public class AntGame extends JPanel implements ActionListener, MouseListener {
 
 			Ant ant = place.getAnt();
 			if (ant != null) { // draw the ant if we have one
+				if (ant instanceof Containing  ){//si la fourmi est une containing
+					if(  (  (Containing)ant).getContenantInsect()!=null){//on verifie si elle contient une fourmi
+						Image img = ANT_IMAGES.get(((Containing)ant).getContenantInsect().getClass().getName());//dans ce cas on dessine la fourmi
+						g2d.drawImage(img, rect.x + PLACE_PADDING.width, rect.y + PLACE_PADDING.height, null);
+					}
+					
+				}
 				Image img = ANT_IMAGES.get(ant.getClass().getName());
 				g2d.drawImage(img, rect.x + PLACE_PADDING.width, rect.y + PLACE_PADDING.height, null);
 			}
@@ -577,6 +590,7 @@ public class AntGame extends JPanel implements ActionListener, MouseListener {
 	public void actionPerformed (ActionEvent e) {
 		if (e.getSource() == clock) {
 			nextFrame();
+			//System.out.println("nextFrame="+frame);
 		}
 	}
 
