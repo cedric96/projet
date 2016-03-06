@@ -2,6 +2,8 @@ package core;
 
 import java.util.ArrayList;
 
+
+
 /**
  * An entire colony of ants and their tunnels.
  *
@@ -14,7 +16,8 @@ public class AntColony {
 	public static final int MAX_TUNNEL_LENGTH = 8;
 
 	private int food; // amount of food available
-	private Place queenPlace; // where the queen is
+	//j'ai change de la variable queenPlace en QueenPlace au lieu de Place
+	private QueenPlace queenPlace; // where the queen is
 	private ArrayList<Place> places; // the places in the colony
 	private ArrayList<Place> beeEntrances; // places which bees can enter (the starts of the tunnels)
 	
@@ -37,7 +40,7 @@ public class AntColony {
 		// init variables
 		places = new ArrayList<Place>();
 		beeEntrances = new ArrayList<Place>();
-		queenPlace = new Place(QUEEN_NAME); // magic variable namexw
+		queenPlace = new QueenPlace(QUEEN_NAME); // magic variable namexw
 
 		tunnelLength = Math.min(tunnelLength, MAX_TUNNEL_LENGTH); // don't go off the screen!
 		// set up tunnels, as a kind of linked-list
@@ -88,8 +91,18 @@ public class AntColony {
 	 *
 	 * @return The queen's location
 	 */
-	public Place getQueenPlace () {
-		return queenPlace;
+	public QueenPlace getQueenPlace () {	
+		
+		//System.out.println(queenPlace);
+		return  queenPlace;
+	}
+	//setter de queenPlace
+	public void setContaintqueenPlace(Place place){
+		queenPlace.place_reine=place;
+	}
+	//getter de queenPlace
+	public Place getContaintqueenPlace(){
+		return queenPlace.place_reine;
 	}
 
 	/**
@@ -117,6 +130,7 @@ public class AntColony {
 	 * @return if there are any bees in the queen's location
 	 */
 	public boolean queenHasBees () {
+		//println("la place contenue dans queenPlace: "+queenPlace.place_reine);
 		return queenPlace.getBees().length > 0;
 	}
 

@@ -51,7 +51,7 @@ public class BodyguardAnt extends Ant implements Containing {
 		
 	}
 	
-	@Override
+	//@Override
 	public void action(AntColony colony) {
 		if (fourmiContenue!=null){
 			fourmiContenue.action(colony);

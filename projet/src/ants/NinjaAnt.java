@@ -11,7 +11,7 @@ private int damage=1;
 	
 	public NinjaAnt (){
 		super(6,1);
-		bloqueChemin=false;
+		this.setBloqueChemin(false);
 	}
 	
 	public void action(AntColony Colony){

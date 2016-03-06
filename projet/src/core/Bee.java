@@ -53,25 +53,34 @@ public class Bee extends Insect {
 	 * @return if the bee can advance
 	 */
 	public boolean isBlocked () {
-		if (place.getAnt() != null){  //si on a une fourmi on verifie si elle laisse passer les abeille 
-			return place.getAnt().bloqueChemin;
+		if (place.getAnt() != null){//si on a une fourmi on verifie si elle laisse passer les abeille
+			
+				return place.getAnt().getBloqueChemin();
+			
+			
 		}else{ //ou pas si on a pas de fourmi on laisse passer labeille
 			return false;
 		}
 		
 	}
-
+	
+	//je cree un getteur pour le DAMAGE
+	public int getDamage(){
+		return this.DAMAGE;
+	}
 	/**
 	 * A bee's action is to sting the Ant that blocks its exit if it is blocked,
 	 * otherwise it moves to the exit of its current place.
 	 */
 	@Override
 	public void action (AntColony colony) {
-		if (isBlocked()) {
-			sting(place.getAnt());
-		}
-		else if (armor > 0) {
-			moveTo(place.getExit());
+		if (this.armor >0){
+			if (isBlocked()) {
+				sting(place.getAnt());
+			}
+			else if (armor > 0) {
+				moveTo(place.getExit());
+			}
 		}
 	}
 }

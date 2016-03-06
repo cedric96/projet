@@ -9,7 +9,9 @@ package core;
 public abstract class Insect {
 
 	protected int armor; // insect's current armor
-	protected Place place; // insect's current location
+	
+	
+	protected   Place place; // insect's current location
 	protected boolean watersafe; // dis si l'insect resiste a l'eau ou pas
 	
 
@@ -57,7 +59,7 @@ public abstract class Insect {
 	 *
 	 * @return the insect's current location
 	 */
-	public Place getPlace () {
+	public  Place getPlace () {
 		return place;
 	}
 
@@ -69,7 +71,7 @@ public abstract class Insect {
 	public int getArmor () {
 		return armor;
 	}
-	
+
 	/** retournes l'etat courant de l'attribut watersafe
 	 * 
 	 */

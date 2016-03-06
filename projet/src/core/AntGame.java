@@ -37,7 +37,7 @@ import ants.ThrowerAnt;
  * @author Joel
  * @version Fa2014
  */
-@SuppressWarnings("serial")
+//@SuppressWarnings("serial")
 public class AntGame extends JPanel implements ActionListener, MouseListener {
 
 	/**
@@ -192,12 +192,15 @@ public class AntGame extends JPanel implements ActionListener, MouseListener {
 					
 				if (ant instanceof ThrowerAnt) // if we're a thrower, might need to make a leaf!
 				{
-					Bee target = ((ThrowerAnt) ant).getTarget(); // who we'll throw at (really which square, but works out the same)
-					if (target != null) {
-						createLeaf(ant, target);
+					if (ant.armor>0){//je precise ici encore que cette action ne doit se faire que si l'armor est superieur a 0
+						Bee target = ((ThrowerAnt) ant).getTarget(); // who we'll throw at (really which square, but works out the same)
+						if (target != null) {
+							createLeaf(ant, target);
+						}
 					}
+					
 				}
-				System.out.println("Colony="+colony);
+				//System.out.println("Colony="+colony);
 					ant.action(colony); // take the action (actually completes the throw now)
 				
 				

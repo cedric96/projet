@@ -48,6 +48,7 @@ public class Hive extends Place {
 
 		for (Bee b : wave) // move all the bees in
 		{
+			//int randExit=1;//je demande aux abeilles daller toutes dans tunnel 1
 			int randExit = (int) (Math.random() * exits.length);
 			b.moveTo(exits[randExit]); // move b to a random exit from the hive (entrance to the colony)
 		}

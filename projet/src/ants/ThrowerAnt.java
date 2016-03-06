@@ -11,7 +11,7 @@ import core.Bee;
  */
 public class ThrowerAnt extends Ant {
 
-	protected int damage;
+	
 
 	/**
 	 * Creates a new Thrower Ant.
@@ -34,9 +34,12 @@ public class ThrowerAnt extends Ant {
 
 	@Override
 	public void action (AntColony colony) {
-		Bee target = getTarget();
-		if (target != null) {
-			target.reduceArmor(damage);
+		if (this.armor>0){//la throwerAnt ne fait une action que si son armor est superieur a 0
+			Bee target = getTarget();
+			if (target != null) {
+				target.reduceArmor(damage);
+			}
 		}
+		
 	}
 }

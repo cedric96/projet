@@ -1,7 +1,9 @@
 package core;
 
 import java.util.ArrayList;
-import ants.BodyguardAnt;
+
+
+
 
 /**
  * Represents a location in the game
@@ -10,7 +12,7 @@ import ants.BodyguardAnt;
  * @version Fall 2014
  */
 public class Place {
-
+	
 	private String name; // a name we can use for debugging
 	private Place exit; // where you leave this place to
 	private Place entrance; // where you enter this place from
@@ -57,8 +59,34 @@ public class Place {
 	 *
 	 * @return an array of the place's bees
 	 */
+	public  ArrayList<Bee> myself_getBees(){//je cree une fonction annexe qui me renvoie UNE LISTE DYNAMIQUE des abeilles
+		return bees;//avant que cette liste ne soit convertie en tableau
+	}
+	
 	public Bee[] getBees () {
-		return bees.toArray(new Bee[0]);
+		ArrayList<Bee> totalBees=this.myself_getBees();//je cree une liste qui contiendra l'ensemble des abeilles 
+		if (this instanceof QueenPlace ==false){//si la place n'est pas une QueenPlace
+			//totalBees=this.myself_getBees();//la liste totale des abeilles correspond aux abeilles presentes seulement sur cette plac
+			return totalBees.toArray(new Bee[0]);
+		}
+		else{//si la place est une QueenPlace
+			if (((QueenPlace)this).place_reine !=null){//et qu'ellle contient d'autres Queenplace 
+				//il s'agit ici des queenPlace en fin de tunnels qui contiennent eventuellement place_reine la place qu'ocupe la reine actuellement
+				
+				for (Bee bee:(((QueenPlace)this).place_reine).myself_getBees()){
+					//pour toute abeille presente sur la place "place_reine" donc sur la meme place que la reine
+					totalBees.add(bee);//j'ajoute cette abeille a la liste totale des abeilles 
+				}
+				return totalBees.toArray(new Bee[0]);
+			}
+			
+			else{//et qu'elle ne contient pas d' autre place en loccurrence si la Reine n'est pas appelée
+			 
+			 
+				totalBees=this.myself_getBees();
+				return totalBees.toArray(new Bee[0]);
+			}
+		}
 	}
 
 	/**
