@@ -1,12 +1,12 @@
 package ants;
 import core.AntColony;
-
+import core.Undeletable;
 
 import java.util.ArrayList;
 
 import core.Ant;
 
-public  class QueenAnt extends ScubaThrowerAnt{
+public  class QueenAnt extends ScubaThrowerAnt implements Undeletable {
 	   
 	/**le nombre de reine.
 	je le fais debuter a -1 car par defaut se crre des le debut la reine presente a la fin des tunnels 
@@ -82,7 +82,7 @@ public  class QueenAnt extends ScubaThrowerAnt{
 			
 			else{// si mon nbreInstance est superieur a 1 il y a donc plus d'une reine 
 				//dans le jeu.
-				
+				list_Queen.get(nbreInstance).isDeletable=true;
 				list_Queen.get(nbreInstance).reduceArmor(1);//on supprime donc celle qu'on vient d'ajouter
 				list_Queen.remove(nbreInstance);//On veuille a la supprimer de  notre liste dynamique
 				nbreInstance--;//on decremente le nbreInstance puisqu'on a plus qu'une reine

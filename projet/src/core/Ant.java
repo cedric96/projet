@@ -5,11 +5,12 @@ package core;
  *
  * @author YOUR NAME HERE
  */
-public abstract class Ant extends Insect implements Damaging{
+public abstract class Ant extends Insect implements Damaging {
 	protected int damage;//Je redefini le damage ici pour qu'il soit accessible par toute les fourmi
 	//il etait auparavant dans ThrowerAnt
 	protected int foodCost; // the amount of food needed to make this ant
 	private boolean bloqueChemin; //varaiable permettant de savoir si la fourni freine le chemin de l'abeille ou pas
+	protected boolean isDeletable;
 	/**
 	 * Creates a new Ant, with a food cost of 0.
 	 *
@@ -26,6 +27,11 @@ public abstract class Ant extends Insect implements Damaging{
 		super(armor,null);
 		this.foodCost=food_cost;
 		this.bloqueChemin=true;
+		if (this instanceof Undeletable) {
+			this.isDeletable=false;
+		} else { 
+			this.isDeletable=true;
+		}
 		damage=0;
 
 	}
@@ -64,5 +70,13 @@ public abstract class Ant extends Insect implements Damaging{
 	
 	public boolean getBloqueChemin(){
 		return bloqueChemin;
+	}
+	
+	public boolean getDelete() {
+		return this.isDeletable ;
+	}
+	
+	public void setDelete(boolean B) {
+		this.isDeletable=B;
 	}
 }

@@ -80,7 +80,7 @@ public class Place {
 				return totalBees.toArray(new Bee[0]);
 			}
 			
-			else{//et qu'elle ne contient pas d' autre place en loccurrence si la Reine n'est pas appelée
+			else{//et qu'elle ne contient pas d' autre place en loccurrence si la Reine n'est pas appelï¿½e
 			 
 			 
 				totalBees=this.myself_getBees();
@@ -223,26 +223,28 @@ public class Place {
 	 *            The ant to remove from the place
 	 */
 	public void removeInsect (Ant ant) {
-		if (this.ant == ant) {//Si on detecte un insecte 
-			//Si on detecte un insecte il est soit Containing et contient eventuellement un autre ou il est non containing
-			if (ant instanceof Containing){//Si il est containing
-				if (((Containing)this.ant).getContenantInsect()!=null){//on regarde s'il contient quelque chose 
-					Ant temp=((Containing)this.ant).getContenantInsect();//Je crre une variable locale pour memoriser linsecte contenu
-					this.ant=null;//je supprime alors la Containing
-					ant.setPlace(null);
-					this.addInsect(temp);//Puis je rajoute sur la meme place l'insecte contenu
-				}else{//Si la containing ne contient rien
-					this.ant=null;//On la supprime
+		if (ant.isDeletable==true) {
+			if (this.ant == ant) {//Si on detecte un insecte 
+				//Si on detecte un insecte il est soit Containing et contient eventuellement un autre ou il est non containing
+				if (ant instanceof Containing){//Si il est containing
+					if (((Containing)this.ant).getContenantInsect()!=null){//on regarde s'il contient quelque chose 
+						Ant temp=((Containing)this.ant).getContenantInsect();//Je crre une variable locale pour memoriser linsecte contenu
+						this.ant=null;//je supprime alors la Containing
+						ant.setPlace(null);
+						this.addInsect(temp);//Puis je rajoute sur la meme place l'insecte contenu
+					}else{//Si la containing ne contient rien
+						this.ant=null;//On la supprime
+						ant.setPlace(null);
+					}
+				}else{//Si cest pas une containing on la supprime
+					this.ant = null;
 					ant.setPlace(null);
 				}
-			}else{//Si cest pas une containing on la supprime
-				this.ant = null;
-				ant.setPlace(null);
-			}
+				
 			
-		
-		}else {
-			System.out.println(ant + " is not in " + this);
+			}else {
+				System.out.println(ant + " is not in " + this);
+			}
 		}
 	}
 

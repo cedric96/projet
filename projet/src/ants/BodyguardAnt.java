@@ -8,6 +8,7 @@ public class BodyguardAnt extends Ant implements Containing {
 	private Ant	fourmiContenue=null;
 	
 	
+	
 	public BodyguardAnt (){
 		
 		super(5,2);

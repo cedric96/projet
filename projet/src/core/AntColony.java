@@ -146,8 +146,8 @@ public class AntColony {
 	public void deployAnt (Place place, Ant ant) {
 		if (food >= ant.getFoodCost()) {
 			place.addInsect(ant);
-			if (place.getAnt()==ant){//j'ai modifié cette fonction pour que la nourriture
-				food -= ant.getFoodCost();//ne soit consommée que lorsque l'insecte est vraiment ajouté
+			if (place.getAnt()==ant){//j'ai modifiï¿½ cette fonction pour que la nourriture
+				food -= ant.getFoodCost();//ne soit consommï¿½e que lorsque l'insecte est vraiment ajoutï¿½
 			}
 			
 			
@@ -210,4 +210,6 @@ public class AntColony {
 	public String toString () {
 		return "Food: " + food + "; " + getAllBees() + "; " + getAllAnts();
 	}
+	
+	
 }
