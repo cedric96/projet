@@ -64,6 +64,8 @@ public class Bee extends Insect {
 		
 	}
 	
+	
+	
 	//je cree un getteur pour le DAMAGE
 	public int getDamage(){
 		return Bee.DAMAGE;
