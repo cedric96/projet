@@ -1,10 +1,7 @@
 package ants;
 
-
-
 import core.Ant;
 import core.AntColony;
-import core.Place;
 import core.Bee;
 
 public class FireAnt extends Ant {

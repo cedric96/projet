@@ -1,7 +1,6 @@
 package ants;
 import core.AntColony;
-import core.Place;
-import core.QueenPlace;
+
 
 import java.util.ArrayList;
 

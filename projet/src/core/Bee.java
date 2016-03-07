@@ -66,7 +66,7 @@ public class Bee extends Insect {
 	
 	//je cree un getteur pour le DAMAGE
 	public int getDamage(){
-		return this.DAMAGE;
+		return Bee.DAMAGE;
 	}
 	/**
 	 * A bee's action is to sting the Ant that blocks its exit if it is blocked,
