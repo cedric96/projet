@@ -12,5 +12,5 @@ public class WallAnt extends Ant {
 	}
 	public void action (AntColony Colony){
 		
-	}
+	} // On redefini pour qu'elle ne fasse rien
 }

@@ -13,7 +13,7 @@ public class FireAnt extends Ant {
 		
 	}
 	public void reduceArmor(int amount){
-		Bee[] bee_table=place.getBees();//je mets dans un tableau toutes les abeille presente a la place;
+		Bee[] bee_table=place.getBees(); // Je mets dans un tableau toutes les abeilles presentes à la place;
 		
 		super.reduceArmor(amount);
 		if (this.armor<=0){

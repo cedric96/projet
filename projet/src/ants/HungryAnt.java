@@ -5,9 +5,9 @@ import core.Bee;
 //import core.Insect;
 
 
-/*fourmi qui tue instantanement les abeilles 
+// Fourmi qui tue instantanement les abeilles, mais qui a un cooldown de 3 tours
  
- */
+
 public class HungryAnt extends Ant {
 	protected int damage;
 	protected int time=3;
@@ -18,8 +18,8 @@ public class HungryAnt extends Ant {
 	
 	public void action(AntColony colony){
 		Bee target_bee=place.getClosestBee(0, 0);
-		if (time>2){//temps de digestion de trois tours
-			if (target_bee!=null ){//verifie s'il y a une abeille ou pas
+		if (time>2){ // Temps de digestion de trois tours
+			if (target_bee!=null ){ // Verifie s'il y a une abeille ou pas
 				damage=target_bee.getArmor();
 				target_bee.reduceArmor(damage+1);
 				time=0;
