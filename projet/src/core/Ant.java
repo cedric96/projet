@@ -11,6 +11,7 @@ public abstract class Ant extends Insect implements Damaging {
 	protected int foodCost; // the amount of food needed to make this ant
 	private boolean bloqueChemin; //varaiable permettant de savoir si la fourni freine le chemin de l'abeille ou pas
 	protected boolean isDeletable;
+	protected String name;
 	/**
 	 * Creates a new Ant, with a food cost of 0.
 	 *
@@ -78,5 +79,9 @@ public abstract class Ant extends Insect implements Damaging {
 	
 	public void setDelete(boolean B) {
 		this.isDeletable=B;
+	}
+	
+	public String getName(){
+		return name;
 	}
 }

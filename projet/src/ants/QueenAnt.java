@@ -9,8 +9,8 @@ import core.Ant;
 public  class QueenAnt extends ScubaThrowerAnt implements Undeletable {
 	   
 	/** Le nombre de reine.
-	Je le fais debuter a -1 car par defaut se crée dès le début la reine présente a la fin des tunnels.
-	Elle reviendra donc à 0 dès qu'on lance le jeu.
+	Je le fais debuter a -1 car par defaut se cree dï¿½s le dï¿½but la reine prï¿½sente a la fin des tunnels.
+	Elle reviendra donc ï¿½ 0 dï¿½s qu'on lance le jeu.
 	**/
 	private static int nbreInstance=-1;
 	
@@ -24,6 +24,7 @@ public  class QueenAnt extends ScubaThrowerAnt implements Undeletable {
 		super();
 		watersafe=true;
 		foodCost=6;
+		this.name="Queen";
 		this.increment_Instance(); // Je prends soin de lancer cette methode des que je cree une nouvelle reine
 		
 	}
@@ -31,7 +32,7 @@ public  class QueenAnt extends ScubaThrowerAnt implements Undeletable {
 	public void increment_Instance(){
 		nbreInstance++; // J'incremente le nombre de reine
 		System.out.println("le nombre de reine est: "+nbreInstance);
-		list_Queen.add(this); // J'ajoute cette reine creee à ma liste de reine
+		list_Queen.add(this); // J'ajoute cette reine creee ï¿½ ma liste de reine
 		
 		
 		}
@@ -78,11 +79,11 @@ public  class QueenAnt extends ScubaThrowerAnt implements Undeletable {
 			}
 			
 			else{
-				// si mon nbreInstance est superieur à 1 il y a donc plus d'une reine dans le jeu.
+				// si mon nbreInstance est superieur ï¿½ 1 il y a donc plus d'une reine dans le jeu.
 				list_Queen.get(nbreInstance).isDeletable=true; // On rend les  autres reines supprimables
 				list_Queen.get(nbreInstance).reduceArmor(1);//On supprime donc celle(s) qu'on vient d'ajouter
 				list_Queen.remove(nbreInstance);// On veille a la/les supprimer de notre liste dynamique
-				nbreInstance--;// On décremente le nbreInstance puisqu'on a plus qu'une reine
+				nbreInstance--;// On dï¿½cremente le nbreInstance puisqu'on a plus qu'une reine
 				
 			}
 				

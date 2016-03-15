@@ -12,6 +12,8 @@ public class BodyguardAnt extends Ant implements Containing {
 	public BodyguardAnt (){
 		
 		super(5,2);
+		this.name="BodyG";
+				
 		
 		watersafe=true;//il peut resister a l'eau
 		if (fourmiContenue != null){

@@ -12,6 +12,7 @@ private int damage=1;
 	public NinjaAnt (){
 		super(6,1);
 		this.setBloqueChemin(false);
+		this.name="Ninja";
 	}
 	
 	public void action(AntColony Colony){

@@ -2,12 +2,13 @@ package ants;
 import core.AntColony;
 import core.Bee;
 
-//Comme une Thrower, mais à 4+ cases
+//Comme une Thrower, mais ï¿½ 4+ cases
 
 public class LongThrowerAnt extends ThrowerAnt {
 
 	public LongThrowerAnt() {
 		super();
+		this.name="LongT";
 	}
 	
 	public Bee getTarget () {

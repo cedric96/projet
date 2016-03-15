@@ -10,10 +10,11 @@ public class FireAnt extends Ant {
 	
 	public FireAnt(){
 		super(4,1);
+		this.name="Fire";
 		
 	}
 	public void reduceArmor(int amount){
-		Bee[] bee_table=place.getBees(); // Je mets dans un tableau toutes les abeilles presentes à la place;
+		Bee[] bee_table=place.getBees(); // Je mets dans un tableau toutes les abeilles presentes ï¿½ la place;
 		
 		super.reduceArmor(amount);
 		if (this.armor<=0){

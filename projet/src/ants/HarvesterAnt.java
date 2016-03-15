@@ -16,6 +16,7 @@ public class HarvesterAnt extends Ant {
 	public HarvesterAnt () {
 		//completer le super pour ajouter la nourriture
 		super(2,1);
+		this.name="Harvest";
 	}
 
 	@Override

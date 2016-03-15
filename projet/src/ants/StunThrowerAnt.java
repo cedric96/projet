@@ -13,12 +13,13 @@ public class StunThrowerAnt extends ThrowerAnt {
 	public StunThrowerAnt() {
 		super();
 		foodCost=6;
-		damage = 0;
+		//damage = 0;
+		this.name="Stun";
 	}
 	
 	//Je redefini ici le getTarget
 	public Bee getTarget () {
-		return place.getClosestBee(0, 2);
+		return place.getClosestBee(0, 4);
 	}
 	
 	public void action (AntColony colony) {
@@ -29,11 +30,17 @@ public class StunThrowerAnt extends ThrowerAnt {
 				abeilles_Stunees.get(abeilles_Stunees.size()-1).isStun=false;
 			}
 			
-			if (target != null && abeilles_Stunees.contains(target)==false){
-				////une fourmi ne peut etre retardée qu'une fois
-				target.isStun=true;
-				abeilles_Stunees.add(target);
+			if (target != null){
+				target.reduceArmor(damage);
+				if ( abeilles_Stunees.contains(target)==false){
+					
+					////une fourmi ne peut etre retarde qu'une fois
+					target.isStun=true;
+					abeilles_Stunees.add(target);
+				}
 			}
+			
+			 
 			
 		}
 		

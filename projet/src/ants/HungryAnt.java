@@ -14,6 +14,8 @@ public class HungryAnt extends Ant {
 	
 	public HungryAnt(){
 		super(4,1);
+		this.name="Hungry";
+		
 	}
 	
 	public void action(AntColony colony){

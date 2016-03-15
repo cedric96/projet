@@ -8,6 +8,7 @@ public class ScubaThrowerAnt extends ThrowerAnt{
 		super();
 		foodCost=5;
 		watersafe=true;
+		this.name="Scuba";
 	}
 	
 }

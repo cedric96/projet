@@ -453,7 +453,8 @@ public class AntGame extends JPanel implements ActionListener, MouseListener {
 			g2d.drawImage(img, rect.x + PANEL_PADDING.width, rect.y + PANEL_PADDING.height, null);
 
 			// food cost
-			g2d.drawString("" + ant.getFoodCost(), rect.x + (rect.width / 2), rect.y + ANT_IMAGE_SIZE.height + 4 + PANEL_PADDING.height);
+			
+			g2d.drawString(ant.getName() +": "+ ant.getFoodCost(), rect.x + (rect.width / 24), rect.y + ANT_IMAGE_SIZE.height + 1 + PANEL_PADDING.height);
 		}
 
 		// for removing an ant

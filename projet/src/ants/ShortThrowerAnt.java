@@ -2,12 +2,13 @@ package ants;
 
 import core.Bee;
 
- // Thrower, mais de 0 à 2
+ // Thrower, mais de 0 ï¿½ 2
 
 public class ShortThrowerAnt extends ThrowerAnt {
 
 	public ShortThrowerAnt() {
 		super();
+		this.name="ShortT";
 	}
 	
 	public Bee getTarget () {

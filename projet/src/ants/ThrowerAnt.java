@@ -20,6 +20,7 @@ public class ThrowerAnt extends Ant {
 	public ThrowerAnt () {
 		super(4,1);
 		damage = 1;
+		this.name="Thrower";
 	}
 
 	/**
