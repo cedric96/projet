@@ -171,8 +171,8 @@ public class AntGame extends JPanel implements ActionListener, MouseListener {
 
 		if (!clock.isRunning()) { // start text
 			g2d.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 32));
-			g2d.setColor(Color.RED);
-			g2d.drawString("CLICK TO START", 350, 550);
+			g2d.setColor(Color.BLUE);
+			g2d.drawString("Cliquez pour commencer :)", 350, 550);
 		}
 	}
 
@@ -263,11 +263,11 @@ public class AntGame extends JPanel implements ActionListener, MouseListener {
 		{
 			// check for end condition before proceeding
 			if (colony.queenHasBees()) { // we lost!
-				JOptionPane.showMessageDialog(this, "The ant queen has perished! Please try again.", "Bzzzzz!", JOptionPane.PLAIN_MESSAGE);
+				JOptionPane.showMessageDialog(this, "La reine a été atteinte. Vous avez perdu !", "Bzzzzz !", JOptionPane.PLAIN_MESSAGE);
 				System.exit(0); // quit
 			}
 			if (hive.getBees().length + colony.getAllBees().size() == 0) { // no more bees--we won!
-				JOptionPane.showMessageDialog(this, "All bees are vanquished. You win!", "Yaaaay!", JOptionPane.PLAIN_MESSAGE);
+				JOptionPane.showMessageDialog(this, "Toutes les abeilles ont été boutées !", "Bien joué !", JOptionPane.PLAIN_MESSAGE);
 				System.exit(0); // quit
 			}
 		}

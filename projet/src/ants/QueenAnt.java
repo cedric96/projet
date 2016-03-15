@@ -58,17 +58,28 @@ public  class QueenAnt extends ScubaThrowerAnt implements Undeletable {
 				
 				//creation et remplissage de la liste des fourmis voisisines
 				ArrayList<Ant> fourmi_galvanisee=new ArrayList<Ant>();
-				Ant fourmi_d_entree=(temp.getPlace()).getEntrance().getAnt();
-				Ant fourmi_de_sortie=(temp.getPlace()).getExit().getAnt();
-				if (fourmi_galvanisee.contains(fourmi_d_entree)==false){
-					fourmi_galvanisee.add(fourmi_d_entree);
+				
+				
+				if ((temp.getPlace()).getEntrance()!=null){
+					Ant fourmi_d_entree=(temp.getPlace()).getEntrance().getAnt();
+					if (fourmi_galvanisee.contains(fourmi_d_entree)==false){
+						fourmi_galvanisee.add(fourmi_d_entree);
+					}
 				}
-				if (fourmi_galvanisee.contains(fourmi_de_sortie)==false){
-					fourmi_galvanisee.add(fourmi_de_sortie);
+				if ((temp.getPlace()).getExit()!=null){
+					Ant fourmi_de_sortie=(temp.getPlace()).getExit().getAnt();
+					if (fourmi_galvanisee.contains(fourmi_de_sortie)==false){
+						fourmi_galvanisee.add(fourmi_de_sortie);
+					}
 				}
+				
+				
+				
+				
 				
 				//modifications des perfommances des fourmis voisines
 				for (Ant ant : fourmi_galvanisee){
+					//System.out.println("entrance: "+);
 					if (ant!=null){
 						int old_damage=ant.getDamage();//je memorise l'ancienne valeur de damage
 						ant.setDamage(2*old_damage);

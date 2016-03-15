@@ -1,4 +1,5 @@
 package core;
+import java.util.ArrayList;
 
 /**
  * Represents a Bee
@@ -8,9 +9,11 @@ package core;
 public class Bee extends Insect {
 
 	private static final int DAMAGE = 1;
-	public boolean isStun;
 	
-	//private boolean isStun;
+	private boolean slowStun;
+	private int slowTime=0;
+	private int stunTime = 0;
+	private boolean isStun;
 	
 
 	/**
@@ -22,7 +25,7 @@ public class Bee extends Insect {
 	public Bee (int armor) {
 		super(armor);
 		watersafe=true;
-		this.isStun=false;
+		
 	}
 
 	/**
@@ -94,14 +97,43 @@ public class Bee extends Insect {
 				sting(place.getAnt());
 			}
 			else {
-				if (isStun==false){
-					moveTo(place.getExit());
+				if (isStun==true){
+					
+					if (stunTime<1){
+						System.out.println(stunTime);
+						moveTo(this.place);
+						stunTime++;
+					}
+					else{
+						this.isStun=false;
+						
+						stunTime=0;
+					}
 				}
-				else{//il reste sur la place
-					moveTo(place);
+				
+				if (slowStun==true){
+					if (slowTime<2){
+						moveTo(this.place);
+						slowTime++;
+					}
+					else{
+						this.slowStun=false;
+						
+						slowTime=0;
+					}
+				}
+				else {
+					moveTo(place.getExit());
 				}
 				
 			}
 		}
+	}
+	
+	public void setSlowStun(boolean b) {
+		this.slowStun=b;
+	}
+	public void setIsStun(boolean b) {
+		this.isStun=b;
 	}
 }
