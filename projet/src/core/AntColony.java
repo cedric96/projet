@@ -52,11 +52,22 @@ public class AntColony {
 				
 				prev = curr; // keep track of the previous guy (who we will exit to)
 				
-				//jai rajoute le if pour creer de l'eau
-				if ( moatFrequency!=0 && step%moatFrequency==0){
-					curr=new Water("tunnel[" + tunnel + "-" + step + "]", prev);// create new Water with an exit that is the previous spot
-				}else{
-					curr = new Place("tunnel[" + tunnel + "-" + step + "]", prev); // create new place with an exit that is the previous spot
+				//ajout le if pour creer de l'eau
+				//jai un peu mixer lapparirtion de leau dans les diff tunnels
+				if (tunnel%2==0){
+					if ( moatFrequency!=0 && step%moatFrequency==1){
+						curr=new Water("tunnel[" + tunnel + "-" + step + "]", prev);// create new Water with an exit that is the previous spot
+					}else{
+						curr = new Place("tunnel[" + tunnel + "-" + step + "]", prev); // create new place with an exit that is the previous spot
+					}
+				}
+				else{
+					if ( moatFrequency!=0 && step%moatFrequency==0){
+						curr=new Water("tunnel[" + tunnel + "-" + step + "]", prev);// create new Water with an exit that is the previous spot
+					}else{
+						curr = new Place("tunnel[" + tunnel + "-" + step + "]", prev); // create new place with an exit that is the previous spot
+					}
+					
 				}
 				
 
