@@ -23,7 +23,7 @@ public class StunThrowerAnt extends ThrowerAnt{
 		
 		Bee target=getTarget();
 		if (target != null){
-			target.setIsStun(true);
+			target.setStun(true);
 		}
 		
 	}

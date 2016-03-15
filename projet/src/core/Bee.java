@@ -97,20 +97,6 @@ public class Bee extends Insect {
 				sting(place.getAnt());
 			}
 			else {
-				if (isStun==true){
-					
-					if (stunTime<1){
-						System.out.println(stunTime);
-						moveTo(this.place);
-						stunTime++;
-					}
-					else{
-						this.isStun=false;
-						
-						stunTime=0;
-					}
-				}
-				
 				if (slowStun==true){
 					if (slowTime<2){
 						moveTo(this.place);
@@ -118,10 +104,21 @@ public class Bee extends Insect {
 					}
 					else{
 						this.slowStun=false;
-						
 						slowTime=0;
 					}
 				}
+				else if (isStun==true){
+					if (stunTime<1){
+						System.out.println(stunTime);
+						moveTo(this.place);
+						stunTime++;
+					}
+					else{
+						this.isStun=false;
+						stunTime=0;
+					}
+				}
+
 				else {
 					moveTo(place.getExit());
 				}
@@ -133,7 +130,7 @@ public class Bee extends Insect {
 	public void setSlowStun(boolean b) {
 		this.slowStun=b;
 	}
-	public void setIsStun(boolean b) {
+	public void setStun(boolean b) {
 		this.isStun=b;
 	}
 }
