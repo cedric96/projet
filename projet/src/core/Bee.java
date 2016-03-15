@@ -8,6 +8,9 @@ package core;
 public class Bee extends Insect {
 
 	private static final int DAMAGE = 1;
+	public boolean isStun;
+	
+	//private boolean isStun;
 	
 
 	/**
@@ -19,6 +22,7 @@ public class Bee extends Insect {
 	public Bee (int armor) {
 		super(armor);
 		watersafe=true;
+		this.isStun=false;
 	}
 
 	/**
@@ -70,6 +74,15 @@ public class Bee extends Insect {
 	public int getDamage(){
 		return Bee.DAMAGE;
 	}
+	
+	
+	//public void setStun(boolean b){
+		//this.isStun=b;
+	//}
+	
+	//public boolean getStun(){
+		//return isStun;
+	//}
 	/**
 	 * A bee's action is to sting the Ant that blocks its exit if it is blocked,
 	 * otherwise it moves to the exit of its current place.
@@ -80,8 +93,14 @@ public class Bee extends Insect {
 			if (isBlocked()) {
 				sting(place.getAnt());
 			}
-			else if (armor > 0) {
-				moveTo(place.getExit());
+			else {
+				if (isStun==false){
+					moveTo(place.getExit());
+				}
+				else{//il reste sur la place
+					moveTo(place);
+				}
+				
 			}
 		}
 	}

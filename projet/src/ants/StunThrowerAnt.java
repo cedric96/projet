@@ -1,4 +1,6 @@
 package ants;
+import java.util.ArrayList;
+
 import core.AntColony;
 import core.Bee;
 
@@ -6,6 +8,7 @@ import core.Bee;
 public class StunThrowerAnt extends ThrowerAnt {
 	
 	private int time=0;
+	ArrayList<Bee> abeilles_Stunees=new ArrayList<Bee>();
 	
 	public StunThrowerAnt() {
 		super();
@@ -13,15 +16,25 @@ public class StunThrowerAnt extends ThrowerAnt {
 		damage = 0;
 	}
 	
+	//Je redefini ici le getTarget
+	public Bee getTarget () {
+		return place.getClosestBee(0, 2);
+	}
+	
 	public void action (AntColony colony) {
 		if (this.armor>0){//la throwerAnt ne fait une action que si son armor est superieur a 0
 			Bee target = getTarget();
-			if (target != null) {
-				for (int time=0;time<2;time++) {
-				
-					
-				}
+			//Je remets a false le isStun de labeille qui a ete mis a true lors du tour precedent
+			if (abeilles_Stunees.size()!=0){
+				abeilles_Stunees.get(abeilles_Stunees.size()-1).isStun=false;
 			}
+			
+			if (target != null && abeilles_Stunees.contains(target)==false){
+				////une fourmi ne peut etre retardée qu'une fois
+				target.isStun=true;
+				abeilles_Stunees.add(target);
+			}
+			
 		}
 		
 	}
