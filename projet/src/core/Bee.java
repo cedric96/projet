@@ -97,6 +97,7 @@ public class Bee extends Insect {
 				sting(place.getAnt());
 			}
 			else {
+				//je geres ici les slow et stun
 				if (slowStun==true){
 					if (slowTime<2){
 						moveTo(this.place);
