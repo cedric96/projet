@@ -12,7 +12,6 @@ public class SlowThrowerAnt extends ThrowerAnt {
 	public SlowThrowerAnt(){
 		super();
 		foodCost=4;
-		damage=0;
 		name="SlowT";
 	}
 	
@@ -25,6 +24,7 @@ public class SlowThrowerAnt extends ThrowerAnt {
 		Bee target=getTarget();
 		if (target != null){
 			target.setSlowStun(true);
+			target.reduceArmor(damage);
 		}
 		
 	}

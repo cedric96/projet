@@ -24,6 +24,7 @@ public class StunThrowerAnt extends ThrowerAnt{
 		Bee target=getTarget();
 		if (target != null){
 			target.setStun(true);
+			target.reduceArmor(damage);
 		}
 		
 	}
