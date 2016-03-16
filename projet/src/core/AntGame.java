@@ -52,8 +52,8 @@ public class AntGame extends JPanel implements ActionListener, MouseListener {
 
 	// game clock & speed
 	public static final int FPS = 30; // target frames per second
-	public static final int TURN_SECONDS = 3; // seconds per turn
-	public static final double LEAF_SPEED = .3; // in seconds
+	public static final int TURN_SECONDS = 2; // seconds per turn
+	public static final double LEAF_SPEED = .2; // in seconds
 	private int turn; // current game turn
 	private int frame; // time elapsed since last turn
 	private Timer clock;
@@ -517,7 +517,7 @@ public class AntGame extends JPanel implements ActionListener, MouseListener {
 	private void initializeColony () {
 		Point pos = new Point(PLACE_POS); // start point of the places
 		int width = BEE_IMAGE_WIDTH + 2 * PLACE_PADDING.width;
-		int height = ANT_IMAGE_SIZE.height + 2 * PLACE_PADDING.height;
+		int height = ANT_IMAGE_SIZE.height + 2* PLACE_PADDING.height;
 		int row = 0;
 		pos.translate((width + PLACE_MARGIN) / 2, 0); // extra shift to make room for queen
 		for (Place place : colony.getPlaces()) {

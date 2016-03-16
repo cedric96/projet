@@ -79,13 +79,7 @@ public class Bee extends Insect {
 	}
 	
 	
-	//public void setStun(boolean b){
-		//this.isStun=b;
-	//}
 	
-	//public boolean getStun(){
-		//return isStun;
-	//}
 	/**
 	 * A bee's action is to sting the Ant that blocks its exit if it is blocked,
 	 * otherwise it moves to the exit of its current place.
