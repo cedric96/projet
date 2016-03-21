@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * @author YOUR NAME HERE
  */
 public class Bee extends Insect {
-
+	public static int nbreabeille=0;
 	private static int DAMAGE = 1;
 	
 	private boolean slowStun;
@@ -52,6 +52,7 @@ public class Bee extends Insect {
 	@Override
 	public void leavePlace () {
 		place.removeInsect(this);
+		nbreabeille+=1;
 	}
 
 	/**

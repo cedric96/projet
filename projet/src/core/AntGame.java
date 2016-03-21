@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Random;
 import java.util.Scanner;
 
 import javax.imageio.ImageIO;
@@ -66,13 +67,18 @@ public class AntGame extends JPanel implements ActionListener, MouseListener {
 	// other images (stored as member variables)
 	private final Image TUNNEL_IMAGE = ImageUtils.loadImage("img/tunnel.gif");
 	private final Image BEE_IMAGE = ImageUtils.loadImage("img/bee.gif");
+	private final Image BEE_IMAGE2 = ImageUtils.loadImage("img/bee2.gif");
+	
 	private final Image NOTSTUNBEE_IMAGE = ImageUtils.loadImage("img/NotStunBee.gif");
+	private final Image NOTSTUNBEE_IMAGE2 = ImageUtils.loadImage("img/NotStunBee2.gif");
+	
 	private final Image GLASSCANONBEE_IMAGE = ImageUtils.loadImage("img/GlassCanonBee.gif");
+	private final Image GLASSCANONBEE_IMAGE2 = ImageUtils.loadImage("img/GlassCanonBee2.gif");
 	
 	private final Image REMOVER_IMAGE = ImageUtils.loadImage("img/remover.gif");
 
 	// positioning constants
-	public static final Dimension FRAME_SIZE = new Dimension(2048, 768);
+	public static final Dimension FRAME_SIZE = new Dimension(1048, 768);
 	public static final Dimension ANT_IMAGE_SIZE = new Dimension(66, 71); // assumed size; may be greater than actual image size
 	public static final int BEE_IMAGE_WIDTH = 58;
 	public static final Point PANEL_POS = new Point(20, 40);
@@ -167,7 +173,7 @@ public class AntGame extends JPanel implements ActionListener, MouseListener {
 			antString = antString.substring(0, antString.length() - 3); // remove the word "ant"
 		}
 		g2d.drawString("Ant selected: " + antString, 20, 20); // hard-coded positions, make variable?
-		g2d.drawString("Food: " + colony.getFood() + ", Turn: " + turn, 20, 140);
+		g2d.drawString("Food: " + colony.getFood() + ", Turn: " + turn+", nombre d'abeilles abatues: "+Bee.nbreabeille, 20, 140);
 
 		drawColony(g2d);
 		drawBees(g2d);
@@ -267,11 +273,11 @@ public class AntGame extends JPanel implements ActionListener, MouseListener {
 		{
 			// check for end condition before proceeding
 			if (colony.queenHasBees()) { // we lost!
-				JOptionPane.showMessageDialog(this, "La reine a �t� atteinte. Vous avez perdu !", "Bzzzzz !", JOptionPane.PLAIN_MESSAGE);
+				JOptionPane.showMessageDialog(this, "La reine a ete atteinte. Vous avez perdu !", "Bzzzzz !", JOptionPane.PLAIN_MESSAGE);
 				System.exit(0); // quit
 			}
 			if (hive.getBees().length + colony.getAllBees().size() == 0) { // no more bees--we won!
-				JOptionPane.showMessageDialog(this, "Toutes les abeilles ont �t� bout�es !", "Bien jou� !", JOptionPane.PLAIN_MESSAGE);
+				JOptionPane.showMessageDialog(this, "Toutes les abeilles ("+Bee.nbreabeille+") ont ete vaincues !", "Bien joue !", JOptionPane.PLAIN_MESSAGE);
 				System.exit(0); // quit
 			}
 		}
@@ -387,16 +393,34 @@ public class AntGame extends JPanel implements ActionListener, MouseListener {
 	// Draws all the Bees (included deceased) in their current locations
 	private void drawBees (Graphics2D g2d) {
 		for (Map.Entry<Bee, AnimPosition> entry : allBeePositions.entrySet()) // go through all the Bee positions
-		{
+		{	Random rand = new Random();
+			int nombre = rand.nextInt(10);
 			AnimPosition pos = entry.getValue();
 			if (entry.getKey() instanceof NotStunAnt ){
-				g2d.drawImage(NOTSTUNBEE_IMAGE, (int) pos.x, (int) pos.y, null);
+				if (nombre%2==1){
+					g2d.drawImage(NOTSTUNBEE_IMAGE, (int) pos.x, (int) pos.y, null);
+				}
+				else{
+					g2d.drawImage(NOTSTUNBEE_IMAGE2, (int) pos.x, (int) pos.y, null);
+				}
+				
 			}
 			else if (entry.getKey() instanceof GlassCanon){
-				g2d.drawImage(GLASSCANONBEE_IMAGE, (int) pos.x, (int) pos.y, null);
+				if (nombre%2==1){
+					g2d.drawImage(GLASSCANONBEE_IMAGE, (int) pos.x, (int) pos.y, null);
+				}
+				else{
+					g2d.drawImage(GLASSCANONBEE_IMAGE2, (int) pos.x, (int) pos.y, null);
+				}
 			}
 			else{
-				g2d.drawImage(BEE_IMAGE, (int) pos.x, (int) pos.y, null); // draw a bee at that position!
+				if (nombre%2==1){
+					g2d.drawImage(BEE_IMAGE, (int) pos.x, (int) pos.y, null); // draw a bee at that position!
+				}
+				else{
+					g2d.drawImage(BEE_IMAGE2, (int) pos.x, (int) pos.y, null); // draw a bee at that position!
+				}
+				
 			}
 			
 		}
