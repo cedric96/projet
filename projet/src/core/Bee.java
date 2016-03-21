@@ -8,7 +8,7 @@ import java.util.ArrayList;
  */
 public class Bee extends Insect {
 
-	private static final int DAMAGE = 1;
+	private static int DAMAGE = 1;
 	
 	private boolean slowStun;
 	private int slowTime=0;
@@ -76,6 +76,9 @@ public class Bee extends Insect {
 	//je cree un getteur pour le DAMAGE
 	public int getDamage(){
 		return Bee.DAMAGE;
+	}
+	public void setDamage(int newDamage){
+		this.DAMAGE=newDamage;
 	}
 	
 	

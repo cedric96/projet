@@ -3,6 +3,7 @@ package core;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * Represents a hive--which contains the bees that will attack!
@@ -66,8 +67,24 @@ public class Hive extends Place {
 	public void addWave (int attackTime, int numBees) {
 		Bee[] bees = new Bee[numBees];
 		for (int i = 0; i < bees.length; i++) {
-			bees[i] = new Bee(beeArmor);
-			this.addInsect(bees[i]); // put the bee in Place
+			
+			Random rand = new Random();
+			int nombreAleatoire = rand.nextInt(10+ 1) + 1;
+			if (nombreAleatoire%2==0){
+				
+				bees[i] = new Bee(beeArmor);
+				this.addInsect(bees[i]); // put the bee in Place
+			}
+			else if (nombreAleatoire%3==0){
+				bees[i]=new GlassCanon(beeArmor);
+				this.addInsect(bees[i]); // put the bee in Place
+			}
+			else{
+				bees[i]=new NotStunAnt(beeArmor);
+				this.addInsect(bees[i]); // put the bee in Place
+				
+			}
+			
 		}
 		waves.put(attackTime, bees);
 	}
@@ -98,8 +115,10 @@ public class Hive extends Place {
 	 */
 	public static Hive makeTestHive () {
 		Hive hive = new Hive(3);
-		hive.addWave(2, 2);
-		hive.addWave(1, 1);
+		hive.addWave(2, 10);
+		hive.addWave(1, 2);
+		//hive.addWave(1, 2);
+		
 		return hive;
 	}
 

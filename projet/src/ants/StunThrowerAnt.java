@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 import core.AntColony;
 import core.Bee;
+import core.NotStunAnt;
 
 
 public class StunThrowerAnt extends ThrowerAnt{
@@ -23,8 +24,11 @@ public class StunThrowerAnt extends ThrowerAnt{
 		
 		Bee target=getTarget();
 		if (target != null){
-			target.setStun(true);
-			target.reduceArmor(damage);
+			if (target instanceof NotStunAnt ==false){
+				target.setStun(true);
+				target.reduceArmor(damage);
+			}
+			
 		}
 		
 	}

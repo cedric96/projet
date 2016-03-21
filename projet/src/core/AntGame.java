@@ -66,10 +66,13 @@ public class AntGame extends JPanel implements ActionListener, MouseListener {
 	// other images (stored as member variables)
 	private final Image TUNNEL_IMAGE = ImageUtils.loadImage("img/tunnel.gif");
 	private final Image BEE_IMAGE = ImageUtils.loadImage("img/bee.gif");
+	private final Image NOTSTUNBEE_IMAGE = ImageUtils.loadImage("img/NotStunBee.gif");
+	private final Image GLASSCANONBEE_IMAGE = ImageUtils.loadImage("img/GlassCanonBee.gif");
+	
 	private final Image REMOVER_IMAGE = ImageUtils.loadImage("img/remover.gif");
 
 	// positioning constants
-	public static final Dimension FRAME_SIZE = new Dimension(1024, 768);
+	public static final Dimension FRAME_SIZE = new Dimension(2048, 768);
 	public static final Dimension ANT_IMAGE_SIZE = new Dimension(66, 71); // assumed size; may be greater than actual image size
 	public static final int BEE_IMAGE_WIDTH = 58;
 	public static final Point PANEL_POS = new Point(20, 40);
@@ -105,6 +108,7 @@ public class AntGame extends JPanel implements ActionListener, MouseListener {
 	 *            The hive (and attack plan) for the game
 	 */
 	public AntGame (AntColony colony, Hive hive) {
+		
 		// game init stuff
 		this.colony = colony;
 		this.hive = hive;
@@ -263,11 +267,11 @@ public class AntGame extends JPanel implements ActionListener, MouseListener {
 		{
 			// check for end condition before proceeding
 			if (colony.queenHasBees()) { // we lost!
-				JOptionPane.showMessageDialog(this, "La reine a été atteinte. Vous avez perdu !", "Bzzzzz !", JOptionPane.PLAIN_MESSAGE);
+				JOptionPane.showMessageDialog(this, "La reine a ï¿½tï¿½ atteinte. Vous avez perdu !", "Bzzzzz !", JOptionPane.PLAIN_MESSAGE);
 				System.exit(0); // quit
 			}
 			if (hive.getBees().length + colony.getAllBees().size() == 0) { // no more bees--we won!
-				JOptionPane.showMessageDialog(this, "Toutes les abeilles ont été boutées !", "Bien joué !", JOptionPane.PLAIN_MESSAGE);
+				JOptionPane.showMessageDialog(this, "Toutes les abeilles ont ï¿½tï¿½ boutï¿½es !", "Bien jouï¿½ !", JOptionPane.PLAIN_MESSAGE);
 				System.exit(0); // quit
 			}
 		}
@@ -382,9 +386,19 @@ public class AntGame extends JPanel implements ActionListener, MouseListener {
 
 	// Draws all the Bees (included deceased) in their current locations
 	private void drawBees (Graphics2D g2d) {
-		for (AnimPosition pos : allBeePositions.values()) // go through all the Bee positions
+		for (Map.Entry<Bee, AnimPosition> entry : allBeePositions.entrySet()) // go through all the Bee positions
 		{
-			g2d.drawImage(BEE_IMAGE, (int) pos.x, (int) pos.y, null); // draw a bee at that position!
+			AnimPosition pos = entry.getValue();
+			if (entry.getKey() instanceof NotStunAnt ){
+				g2d.drawImage(NOTSTUNBEE_IMAGE, (int) pos.x, (int) pos.y, null);
+			}
+			else if (entry.getKey() instanceof GlassCanon){
+				g2d.drawImage(GLASSCANONBEE_IMAGE, (int) pos.x, (int) pos.y, null);
+			}
+			else{
+				g2d.drawImage(BEE_IMAGE, (int) pos.x, (int) pos.y, null); // draw a bee at that position!
+			}
+			
 		}
 	}
 
