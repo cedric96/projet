@@ -8,10 +8,7 @@ import core.Ant;
 
 public  class QueenAnt extends ScubaThrowerAnt implements Undeletable {
 	   
-	/** Le nombre de reine.
-	Je le fais debuter a -1 car par defaut se cree d�s le d�but la reine pr�sente a la fin des tunnels.
-	Elle reviendra donc � 0 d�s qu'on lance le jeu.
-	**/
+	
 	private static int nbreInstance=-1;
 	
 	// une liste dynamique STATIC qui contiendra mes reines presentes 
@@ -31,7 +28,7 @@ public  class QueenAnt extends ScubaThrowerAnt implements Undeletable {
         
 	public void increment_Instance(){
 		nbreInstance++; // J'incremente le nombre de reine
-		System.out.println("le nombre de reine est: "+nbreInstance);
+		
 		list_Queen.add(this); // J'ajoute cette reine creee � ma liste de reine
 		
 		

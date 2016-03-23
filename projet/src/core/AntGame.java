@@ -44,11 +44,14 @@ public class AntGame extends JPanel implements ActionListener, MouseListener {
 	/**
 	 *
 	 */
+	int nbres = 0;//mon compteur pour les animations
 	private static final long serialVersionUID = 1L;
 	// game models
 	private AntColony colony;
 	private Hive hive;
 	private static final String ANT_FILE = "antlist.properties";
+	
+	
 	private static final String ANT_PKG = "ants";
 
 	// game clock & speed
@@ -62,6 +65,7 @@ public class AntGame extends JPanel implements ActionListener, MouseListener {
 	// ant properties (laoded from external files, stored as member variables)
 	private final ArrayList<String> ANT_TYPES;
 	private final Map<String, Image> ANT_IMAGES;// = new HashMap<String,Image>();
+	private final Map<String, Image> ANT_IMAGES2;// = new HashMap<String,Image>();
 	private final Map<String, Color> LEAF_COLORS;// = new HashMap<String, Color>();
 
 	// other images (stored as member variables)
@@ -78,7 +82,7 @@ public class AntGame extends JPanel implements ActionListener, MouseListener {
 	private final Image REMOVER_IMAGE = ImageUtils.loadImage("img/remover.gif");
 
 	// positioning constants
-	public static final Dimension FRAME_SIZE = new Dimension(1048, 768);
+	public static final Dimension FRAME_SIZE = new Dimension(1400, 768);
 	public static final Dimension ANT_IMAGE_SIZE = new Dimension(66, 71); // assumed size; may be greater than actual image size
 	public static final int BEE_IMAGE_WIDTH = 58;
 	public static final Point PANEL_POS = new Point(20, 40);
@@ -86,7 +90,7 @@ public class AntGame extends JPanel implements ActionListener, MouseListener {
 	public static final Point PLACE_POS = new Point(40, 180);
 	public static final Dimension PLACE_PADDING = new Dimension(10, 10);
 	public static final int PLACE_MARGIN = 10;
-	public static final Point HIVE_POS = new Point(875, 300);
+	public static final Point HIVE_POS = new Point(1200, 300);
 	public static final int CRYPT_HEIGHT = 650;
 	public static final Point MESSAGE_POS = new Point(120, 20);
 	public static final Dimension LEAF_START_OFFSET = new Dimension(30, 30);
@@ -104,6 +108,8 @@ public class AntGame extends JPanel implements ActionListener, MouseListener {
 	// variables tracking animations
 	private Map<Bee, AnimPosition> allBeePositions; // maps from Bee to an object storing animation status
 	private ArrayList<AnimPosition> leaves; // leaves we're animating
+	
+	
 
 	/**
 	 * Creates a new game of Ants vs. Some-Bees, with the given colony and hive setup
@@ -127,6 +133,7 @@ public class AntGame extends JPanel implements ActionListener, MouseListener {
 		// member ant property storage variables
 		ANT_TYPES = new ArrayList<String>();
 		ANT_IMAGES = new HashMap<String, Image>();
+		ANT_IMAGES2 = new HashMap<String, Image>();
 		LEAF_COLORS = new HashMap<String, Color>();
 		initializeAnts();
 
@@ -379,15 +386,96 @@ public class AntGame extends JPanel implements ActionListener, MouseListener {
 				if (ant instanceof Containing  ){//si la fourmi est une containing
 					if(  (  (Containing)ant).getContenantInsect()!=null){//on verifie si elle contient une fourmi
 						Image img = ANT_IMAGES.get(((Containing)ant).getContenantInsect().getClass().getName());//dans ce cas on dessine la fourmi
-						g2d.drawImage(img, rect.x + PLACE_PADDING.width, rect.y + PLACE_PADDING.height, null);
+						Image img2 = ANT_IMAGES2.get(((Containing)ant).getContenantInsect().getClass().getName());
+
+						if (nbres<500){
+							g2d.drawImage(img, rect.x + PANEL_PADDING.width, rect.y + PANEL_PADDING.height, null);
+							nbres++;
+						}
+						else if (nbres>=500 && nbres<1000){
+							g2d.drawImage(img2, rect.x + PANEL_PADDING.width, rect.y + PANEL_PADDING.height, null);
+							nbres++;
+							if (nbres>=1000){
+								nbres=0;
+							}
+						}
+							
+						
 					}
 					
 				}
 				Image img = ANT_IMAGES.get(ant.getClass().getName());
-				g2d.drawImage(img, rect.x + PLACE_PADDING.width, rect.y + PLACE_PADDING.height, null);
+				Image img2 = ANT_IMAGES2.get(ant.getClass().getName());
+				if (nbres<500){
+					g2d.drawImage(img, rect.x + PANEL_PADDING.width, rect.y + PANEL_PADDING.height, null);
+					nbres++;
+				}
+				else if (nbres>=500 && nbres<1000){
+					g2d.drawImage(img2, rect.x + PANEL_PADDING.width, rect.y + PANEL_PADDING.height, null);
+					nbres++;
+					if (nbres>=1000){
+						nbres=0;
+					}
+				}
+					
+				
 			}
 
 		}
+	}
+
+	// Draws the ant selector area
+	private void drawAntSelector (Graphics2D g2d) {
+		// go through each selector area
+		for (Map.Entry<Rectangle, Ant> entry : antSelectorAreas.entrySet()) {
+			Rectangle rect = entry.getKey(); // selected area
+			Ant ant = entry.getValue(); // ant to select
+	
+			// box status
+			g2d.setColor(Color.WHITE);
+			if (ant.getFoodCost() > colony.getFood()) {
+				g2d.setColor(Color.GRAY);
+			}
+			else if (ant == selectedAnt) {
+				g2d.setColor(Color.BLUE);
+			}
+			g2d.fill(rect);
+	
+			// box outline
+			g2d.setColor(Color.BLACK);
+			g2d.draw(rect);
+	
+			// ant image
+			Image img = ANT_IMAGES.get(ant.getClass().getName());
+			Image img2=ANT_IMAGES2.get(ant.getClass().getName());
+			if (nbres<500){
+				g2d.drawImage(img, rect.x + PANEL_PADDING.width, rect.y + PANEL_PADDING.height, null);
+				nbres++;
+			}
+			else if (nbres>=500 && nbres<1000){
+				g2d.drawImage(img2, rect.x + PANEL_PADDING.width, rect.y + PANEL_PADDING.height, null);
+				nbres++;
+				if (nbres>=1000){
+					nbres=0;
+				}
+			}
+				
+			
+			
+	
+			// food cost
+			
+			g2d.drawString(ant.getName() +": "+ ant.getFoodCost()+","+ant.armor, rect.x + (rect.width / 24), rect.y + ANT_IMAGE_SIZE.height + 1 + PANEL_PADDING.height);
+		}
+	
+		// for removing an ant
+		if (selectedAnt == null) {
+			g2d.setColor(Color.BLUE);
+			g2d.fill(removerArea);
+		}
+		g2d.setColor(Color.BLACK);
+		g2d.draw(removerArea);
+		g2d.drawImage(REMOVER_IMAGE, removerArea.x + PANEL_PADDING.width, removerArea.y + PANEL_PADDING.height, null);
 	}
 
 	// Draws all the Bees (included deceased) in their current locations
@@ -465,46 +553,6 @@ public class AntGame extends JPanel implements ActionListener, MouseListener {
 		return curve;
 	}
 
-	// Draws the ant selector area
-	private void drawAntSelector (Graphics2D g2d) {
-		// go through each selector area
-		for (Map.Entry<Rectangle, Ant> entry : antSelectorAreas.entrySet()) {
-			Rectangle rect = entry.getKey(); // selected area
-			Ant ant = entry.getValue(); // ant to select
-
-			// box status
-			g2d.setColor(Color.WHITE);
-			if (ant.getFoodCost() > colony.getFood()) {
-				g2d.setColor(Color.GRAY);
-			}
-			else if (ant == selectedAnt) {
-				g2d.setColor(Color.BLUE);
-			}
-			g2d.fill(rect);
-
-			// box outline
-			g2d.setColor(Color.BLACK);
-			g2d.draw(rect);
-
-			// ant image
-			Image img = ANT_IMAGES.get(ant.getClass().getName());
-			g2d.drawImage(img, rect.x + PANEL_PADDING.width, rect.y + PANEL_PADDING.height, null);
-
-			// food cost
-			
-			g2d.drawString(ant.getName() +": "+ ant.getFoodCost(), rect.x + (rect.width / 24), rect.y + ANT_IMAGE_SIZE.height + 1 + PANEL_PADDING.height);
-		}
-
-		// for removing an ant
-		if (selectedAnt == null) {
-			g2d.setColor(Color.BLUE);
-			g2d.fill(removerArea);
-		}
-		g2d.setColor(Color.BLACK);
-		g2d.draw(removerArea);
-		g2d.drawImage(REMOVER_IMAGE, removerArea.x + PANEL_PADDING.width, removerArea.y + PANEL_PADDING.height, null);
-	}
-
 	/**
 	 * Initializes the Ant graphics for the game. This method loads Ant details from an external file.
 	 * Note that this method MUST be called before others (since they rely on the Ant details!)
@@ -522,8 +570,10 @@ public class AntGame extends JPanel implements ActionListener, MouseListener {
 						Class.forName(antType); // make sure the class is implemented and we can load it
 						ANT_TYPES.add(antType);
 						ANT_IMAGES.put(antType, ImageUtils.loadImage(parts[1].trim()));
-						if (parts.length > 2) {
-							LEAF_COLORS.put(antType, new Color(Integer.parseInt(parts[2].trim())));
+						ANT_IMAGES2.put(antType, ImageUtils.loadImage(parts[2].trim()));
+						
+						if (parts.length > 3) {
+							LEAF_COLORS.put(antType, new Color(Integer.parseInt(parts[3].trim())));
 						}
 					}
 					catch (ClassNotFoundException e) {
