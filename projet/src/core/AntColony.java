@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class AntColony {
 
 	public static final String QUEEN_NAME = "AntQueen"; // name of the Queen's place
-	public static final int MAX_TUNNEL_LENGTH = 8;
+	public static final int MAX_TUNNEL_LENGTH = 10;
 
 	private int food; // amount of food available
 	//j'ai change de la variable queenPlace en QueenPlace au lieu de Place
