@@ -187,13 +187,13 @@ public class Place {
 					this.addInsect(ant);//On ajoute la fourmi Containing qui contient bien l'autre fourmi
 					
 				}else {//Sinon si la Containing ne peut pas prendre la non Containing(contient deja une fourmi
-					if (((Containing)ant).getContenantInsect()==this.ant){//si la fourmi contenue est la meme que celle sur place deja
+					/**if (((Containing)ant).getContenantInsect()==this.ant){//si la fourmi contenue est la meme que celle sur place deja
 						this.ant=ant;//je peux alors placer la containing (et la fourmi qu'elle contient) a cette place
 						ant.setPlace(this);
-					}
-					else{
+					}**/
+					//else{
 						System.out.println("Already an ant in " + this); // report error
-					}
+					//}
 					
 				}
 				

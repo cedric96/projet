@@ -22,7 +22,7 @@ public class FireAnt extends Ant {
 			
 			for (Bee bee:bee_table){
 				System.out.println(bee_table);
-				bee.reduceArmor(bee.getArmor());
+				bee.reduceArmor(damage);
 				
 			}
 			
