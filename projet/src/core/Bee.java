@@ -61,20 +61,21 @@ public class Bee extends Insect {
 	 * @return if the bee can advance
 	 */
 	public boolean isBlocked () {
-		if (place.getAnt() != null){//si on a une fourmi on verifie si elle laisse passer les abeille
+		if (place.getAnt() != null){
 			
 				return place.getAnt().getBloqueChemin();
-			
-			
-		}else{ //ou pas si on a pas de fourmi on laisse passer labeille
+		}else{ 
 			return false;
 		}
 		
 	}
 	
 	
+	/***
+	 * Getter et Setter pour les Damage
+	 */
 	
-	//je cree un getteur pour le DAMAGE
+
 	public int getDamage(){
 		return Bee.DAMAGE;
 	}
@@ -95,7 +96,7 @@ public class Bee extends Insect {
 				sting(place.getAnt());
 			}
 			else {
-				//je geres ici les slow et stun
+				//je gere ici les slow et stun
 				if (slowStun==true){
 					if (slowTime<2){
 						moveTo(this.place);

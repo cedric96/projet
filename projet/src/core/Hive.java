@@ -71,13 +71,13 @@ public class Hive extends Place {
 			Random rand = new Random();
 			int nombreAleatoire = rand.nextInt(10+ 1) + 1;
 			if (nombreAleatoire==2 || nombreAleatoire==4){
-				bees[i]=new NotStunAnt(beeArmor);
+				bees[i]=new NotStunBee(beeArmor);
 				this.addInsect(bees[i]); // put the bee in Place
 				
 				
 			}
 			else if (nombreAleatoire==6 || nombreAleatoire==8){
-				bees[i]=new GlassCanon(beeArmor);
+				bees[i]=new GlassCanonBee(beeArmor);
 				this.addInsect(bees[i]); // put the bee in Place
 			}
 			else{
@@ -115,7 +115,7 @@ public class Hive extends Place {
 	 */
 	public static Hive makeTestHive () {
 		Hive hive = new Hive(3);
-		hive.addWave(2, 1);
+		hive.addWave(2, 10);
 		hive.addWave(1, 2);
 		//hive.addWave(1, 2);
 		

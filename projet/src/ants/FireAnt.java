@@ -14,15 +14,14 @@ public class FireAnt extends Ant {
 		
 	}
 	public void reduceArmor(int amount){
-		Bee[] bee_table=place.getBees(); // Je mets dans un tableau toutes les abeilles presentes � la place;
+		Bee[] bee_table=place.getBees(); 
 		
 		super.reduceArmor(amount);
 		if (this.armor<=0){
 			
-			
 			for (Bee bee:bee_table){
 				System.out.println(bee_table);
-				bee.reduceArmor(damage);
+				bee.reduceArmor(bee.getArmor());
 				
 			}
 			

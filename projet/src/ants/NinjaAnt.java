@@ -15,13 +15,19 @@ private int damage=1;
 		this.name="Ninja";
 	}
 	
+	
+	/** 
+	 * Je mets dans un tableau toutes les abeille presente a la place
+	 * On inflige des dommages à chacune
+	 */
+	
 	public void action(AntColony Colony){
 		Place place;
-		place=this.getPlace(); // La place de la fourmi
-		Bee bee_table []=place.getBees(); // Je mets dans un tableau toutes les abeille presente a la place;
+		place=this.getPlace();
+		Bee bee_table []=place.getBees(); 
 		System.out.println("bee_table="+bee_table);
 		
-		for (Bee bee :bee_table){ // pour chaque abeille presente on reduit son armure de 3
+		for (Bee bee :bee_table){ 
 			bee.reduceArmor(damage);
 		}
 	}

@@ -12,7 +12,7 @@ public  class QueenAnt extends ScubaThrowerAnt implements Undeletable {
 	
 	private static int nbreInstance=-1;
 	
-	
+	private boolean reineImposteur;
 	
 	
 	public QueenAnt (){
@@ -21,38 +21,29 @@ public  class QueenAnt extends ScubaThrowerAnt implements Undeletable {
 		watersafe=true;
 		foodCost=6;
 		this.name="Queen";
-		
+		reineImposteur=false;
 		if (nbreInstance>1){
-			//this.isDeletable=true;
+			this.isDeletable=true;
 			this.reduceArmor(this.armor);
 			
-		}	  
-		
-	}
-	
-	
-	public void delete(){
-		
-		
+		}
 	}
 	public Bee getTarget () {
-		return place.getClosestBee(0, 1);}
+		return place.getClosestBee(0, 5);}
 	
    public void action(AntColony colony){
 	   
-	   
+		
 	    if(this!=null){
-	    	
 		   Ant temp=this;
 			
 			//ajout de la position de la reine dans la place queenPlace qui est la fin des tunnels
 			colony.setContaintqueenPlace(temp.getPlace());
 			
 			super.action(colony);//la reine fait les actions de ScubaThrowerAnt
-			
-			//creation et remplissage de la liste des fourmis voisisines
+		
+			//Creation et remplissage de la liste des fourmis voisisines
 			ArrayList<Ant> fourmi_galvanisee=new ArrayList<Ant>();
-			
 			
 			if ((temp.getPlace()).getEntrance()!=null){
 				Ant fourmi_d_entree=(temp.getPlace()).getEntrance().getAnt();
@@ -66,12 +57,8 @@ public  class QueenAnt extends ScubaThrowerAnt implements Undeletable {
 					fourmi_galvanisee.add(fourmi_de_sortie);
 				}
 			}
+			//Modifications des perfommances des fourmis voisines
 			
-			
-			
-			
-			
-			//modifications des perfommances des fourmis voisines
 			for (Ant ant : fourmi_galvanisee){
 				if (ant!=null){
 					int old_damage=ant.getDamage();

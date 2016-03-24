@@ -12,7 +12,7 @@ public abstract class Insect {
 	
 	
 	protected   Place place; // insect's current location
-	protected boolean watersafe; // dis si l'insect resiste a l'eau ou pas
+	protected boolean watersafe; 
 	
 
 	/**
@@ -24,14 +24,14 @@ public abstract class Insect {
 	 *            The insect's location
 	 */
 	
-	//Ancien constructeur..je modifie pour pouvoir ajouter le pouvoir de l'eau
+
 	  public Insect (int armor, Place place) {
 		if (armor <= 0) {
 			throw new IllegalArgumentException("Cannot create an insect with armor of 0");
 		}else
 		this.armor = armor;
 		this.place = place;
-		watersafe=false;
+		watersafe=false;   
 	  }
 	 
 	/**

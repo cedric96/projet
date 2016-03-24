@@ -55,34 +55,31 @@ public class Place {
 	}
 
 	/**
-	 * Returns an array of the place's bees
-	 *
-	 * @return an array of the place's bees
+	Renvoie une liste dynamique ainsi que les abeilles
 	 */
-	public  ArrayList<Bee> myself_getBees(){//je cree une fonction annexe qui me renvoie UNE LISTE DYNAMIQUE des abeilles
-		return bees;//avant que cette liste ne soit convertie en tableau
+	
+	public  ArrayList<Bee> myself_getBees(){
+		return bees;
 	}
 	
+	/** Renvoie un tableau d'abeilles presentes sur une case donnee ou 
+	 * sur la place de la reine (a la fin des tunnels ou autre si on l'a deja placee.
+	 */
+	
 	public Bee[] getBees () {
-		ArrayList<Bee> totalBees=this.myself_getBees();//je cree une liste qui contiendra l'ensemble des abeilles 
-		if (this instanceof QueenPlace ==false){//si la place n'est pas une QueenPlace
-			//totalBees=this.myself_getBees();//la liste totale des abeilles correspond aux abeilles presentes seulement sur cette plac
+		ArrayList<Bee> totalBees=this.myself_getBees();
+		if (this instanceof QueenPlace ==false){
 			return totalBees.toArray(new Bee[0]);
 		}
-		else{//si la place est une QueenPlace
-			if (((QueenPlace)this).place_reine !=null){//et qu'ellle contient d'autres Queenplace 
-				//il s'agit ici des queenPlace en fin de tunnels qui contiennent eventuellement place_reine la place qu'ocupe la reine actuellement
-				
+		else{
+			if (((QueenPlace)this).place_reine !=null) {
 				for (Bee bee:(((QueenPlace)this).place_reine).myself_getBees()){
-					//pour toute abeille presente sur la place "place_reine" donc sur la meme place que la reine
-					totalBees.add(bee);//j'ajoute cette abeille a la liste totale des abeilles 
+					totalBees.add(bee);
 				}
 				return totalBees.toArray(new Bee[0]);
 			}
 			
-			else{//et qu'elle ne contient pas d' autre place en loccurrence si la Reine n'est pas appelï¿½e
-			 
-			 
+			else{
 				totalBees=this.myself_getBees();
 				return totalBees.toArray(new Bee[0]);
 			}
@@ -147,11 +144,15 @@ public class Place {
 	}
 
 	/**
-	 * Adds an ant to the place. If there is already an ant, this method has no effect
-	 *
-	 * @param ant
-	 *            The ant to add to the place.
+	 * On verifie s'il y a de l'eau, donc si on peut placer la fourmi, et si c'est le cas, 
+	 * on verifie si on a une fourmi implementant Containing sans fourmie contenue ou
+	 * une fourmi n'etant pas Containing.
+	 * 
+	 * Si c'est une Containing sans contenu, on place la fourmi ssi ce n'est pas une Containing
+	 * Si ce n'est pas une Containing, on place une Containing
+	 * Sinon, on repporte une erreur.
 	 */
+	
 	public void addInsect (Ant ant) {
 		
 		
@@ -162,44 +163,42 @@ public class Place {
 					this.ant = ant;
 					ant.setPlace(this);
 				}else{
-					System.out.println("This insect can't be here because of Water "); // report error
+					System.out.println("This insect can't be here because of Water "); 
 				}
 			}else{
 				this.ant = ant;
 				ant.setPlace(this);
 			}
-		}else {//si la place nest pas vide
-			if (this.ant instanceof Containing){//si la fourmi presente est une containig
-				if (((Containing)this.ant).addContenantInsect(ant)){//Si la containing peut prendre la non Containing
-					((Containing)this.ant).addContenantInsect(ant);//On lui ajoute notre fourmi
-				}else{//Sinon si la Containing ne peut pas prendre la non Containing
-					System.out.println("Already an ant in " + this); // report error
+		}else {
+			if (this.ant instanceof Containing){
+				if (((Containing)this.ant).addContenantInsect(ant)){
+					((Containing)this.ant).addContenantInsect(ant);
+				}else{
+					System.out.println("Already an ant in " + this); 
 				}
 				
 			}
-			else if (ant instanceof Containing){//Si la fourmi a ajouter est une containing
-				if (((Containing)ant).addContenantInsect(this.ant)){//Si la containing peut prendre la non Containing( ne contient aucune fourmi pour l'instant
-					Place place=this;//On memorise la place qu'occupait la non-containing
-					((Containing)ant).addContenantInsect(this.ant);//On  ajoute dans la containing la fourmi presente auparavant
-					//Puisque la containing n'est pas encore placee en y mettant la premiere fourmi  sa place passe a null 
-					this.ant.setPlace(place);//on lui remets cette place
-					//System.out.println("ant= "+ this.ant);
-					this.addInsect(ant);//On ajoute la fourmi Containing qui contient bien l'autre fourmi
+			else if (ant instanceof Containing){
+				if (((Containing)ant).addContenantInsect(this.ant)){
+					Place place=this;
+					((Containing)ant).addContenantInsect(this.ant);
+					this.ant.setPlace(place);
+					this.addInsect(ant);
 					
-				}else {//Sinon si la Containing ne peut pas prendre la non Containing(contient deja une fourmi
-					/**if (((Containing)ant).getContenantInsect()==this.ant){//si la fourmi contenue est la meme que celle sur place deja
-						this.ant=ant;//je peux alors placer la containing (et la fourmi qu'elle contient) a cette place
+				}else {
+					if (((Containing)ant).getContenantInsect()==this.ant){
+						this.ant=ant;
 						ant.setPlace(this);
-					}**/
-					//else{
-						System.out.println("Already an ant in " + this); // report error
-					//}
+					}
+					else{
+						System.out.println("Already an ant in " + this); 
+					}
 					
 				}
 				
 			}
-			else{//Si aucune des deux fourmi (a ajouter comme celle deja presente) n'est de type Containing
-				System.out.println("Already an ant in " + this); // report error
+			else{
+				System.out.println("Already an ant in " + this);
 			}
 			
 		}
@@ -211,32 +210,35 @@ public class Place {
 	 * @param bee
 	 *            The bee to add to the place.
 	 */
+	
 	public void addInsect (Bee bee) {
 		bees.add(bee);
 		bee.setPlace(this);
 	}
 
+	
 	/**
-	 * Removes the ant from the place. If the given ant is not in this place, this method has no effect
+	 *Supprime une fourmi.
 	 *
-	 * @param ant
-	 *            The ant to remove from the place
+	 *Si c'est une fourmi Containing, on regarde si elle contient quelque chose.
+	 *Si oui, on supprime la Containing en sauvegardant la fourmi contenue et en la replaçant après
+	 *Sinon, on supprime la Containing vide ou la fourmi non Containing.
 	 */
+	
 	public void removeInsect (Ant ant) {
 		if (ant.isDeletable==true) {
-			if (this.ant == ant) {//Si on detecte un insecte 
-				//Si on detecte un insecte il est soit Containing et contient eventuellement un autre ou il est non containing
-				if (ant instanceof Containing){//Si il est containing
-					if (((Containing)this.ant).getContenantInsect()!=null){//on regarde s'il contient quelque chose 
-						Ant temp=((Containing)this.ant).getContenantInsect();//Je crre une variable locale pour memoriser linsecte contenu
-						this.ant=null;//je supprime alors la Containing
+			if (this.ant == ant) {
+				if (ant instanceof Containing){
+					if (((Containing)this.ant).getContenantInsect()!=null){
+						Ant temp=((Containing)this.ant).getContenantInsect();
+						this.ant=null;
 						ant.setPlace(null);
-						this.addInsect(temp);//Puis je rajoute sur la meme place l'insecte contenu
-					}else{//Si la containing ne contient rien
-						this.ant=null;//On la supprime
+						this.addInsect(temp);
+					}else{
+						this.ant=null;
 						ant.setPlace(null);
 					}
-				}else{//Si cest pas une containing on la supprime
+				}else{
 					this.ant = null;
 					ant.setPlace(null);
 				}
