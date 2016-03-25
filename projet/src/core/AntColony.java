@@ -164,8 +164,8 @@ public class AntColony {
 		if (ant!=null && place!=null){
 			if (food >= ant.getFoodCost())  {
 				place.addInsect(ant);
-				if (place.getAnt()==ant){//j'ai modifi� cette fonction pour que la nourriture
-					food -= ant.getFoodCost();//ne soit consomm�e que lorsque l'insecte est vraiment ajout�
+				if (place.getAnt()==ant){//on modifie cette fonction pour que la nourriture
+					food -= ant.getFoodCost();//ne soit consomme que lorsque l'insecte est vraiment ajoute
 				}
 				else {
 					System.out.println("Not enough food remains to place " + ant);

@@ -70,8 +70,8 @@ public class AntGame extends JPanel implements ActionListener, MouseListener {
 
 	// other images (stored as member variables)
 	private final Image TUNNEL_IMAGE = ImageUtils.loadImage("img/tunnel.gif");
-	private final Image BEE_IMAGE = ImageUtils.loadImage("img/bee.gif");
-	private final Image BEE_IMAGE2 = ImageUtils.loadImage("img/bee2.gif");
+	private final Image BEE_IMAGE = ImageUtils.loadImage("img/Bee.gif");
+	private final Image BEE_IMAGE2 = ImageUtils.loadImage("img/Bee2.gif");
 	
 	private final Image NOTSTUNBEE_IMAGE = ImageUtils.loadImage("img/NotStunBee.gif");
 	private final Image NOTSTUNBEE_IMAGE2 = ImageUtils.loadImage("img/NotStunBee2.gif");
