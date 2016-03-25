@@ -484,7 +484,7 @@ public class AntGame extends JPanel implements ActionListener, MouseListener {
 		{	Random rand = new Random();
 			int nombre = rand.nextInt(10);
 			AnimPosition pos = entry.getValue();
-			if (entry.getKey() instanceof NotStunAnt ){
+			if (entry.getKey() instanceof NotStunBee ){
 				if (nombre%2==1){
 					g2d.drawImage(NOTSTUNBEE_IMAGE, (int) pos.x, (int) pos.y, null);
 				}
@@ -493,7 +493,7 @@ public class AntGame extends JPanel implements ActionListener, MouseListener {
 				}
 				
 			}
-			else if (entry.getKey() instanceof GlassCanon){
+			else if (entry.getKey() instanceof GlassCanonBee){
 				if (nombre%2==1){
 					g2d.drawImage(GLASSCANONBEE_IMAGE, (int) pos.x, (int) pos.y, null);
 				}

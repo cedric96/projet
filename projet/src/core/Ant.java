@@ -6,8 +6,8 @@ package core;
  * @author YOUR NAME HERE
  */
 public abstract class Ant extends Insect implements Damaging {
-	protected int damage;//Je redefini le damage ici pour qu'il soit accessible par toute les fourmi
-	//il etait auparavant dans ThrowerAnt
+	protected int damage;//Je redefini le damage ici pour qu'il soit accessible par toutes les fourmi
+						 //il etait auparavant dans ThrowerAnt
 	protected int foodCost; // the amount of food needed to make this ant
 	private boolean bloqueChemin; //varaiable permettant de savoir si la fourni freine le chemin de l'abeille ou pas
 	protected boolean isDeletable;
@@ -54,16 +54,19 @@ public abstract class Ant extends Insect implements Damaging {
 	public void leavePlace () {
 		place.removeInsect(this);
 	}
-	//implantation de getDamage
+	
+	/**
+	 * Getter et Setter pour les differents parametres.
+	 */
+	
 	public int getDamage(){
 		return this.damage;
 	}
-	//implantation du setDamage
+	
 	public void setDamage(int nbre){
 		this.damage=nbre;
 	}
 	
-	//je cree un getteur et un setteur pour la variable bloqueChemin
 	
 	public void setBloqueChemin(boolean b){
 		this.bloqueChemin=b;

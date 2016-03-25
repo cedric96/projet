@@ -2,6 +2,8 @@ package core;
 
 import java.util.ArrayList;
 
+import ants.QueenAnt;
+
 
 
 /**
@@ -124,6 +126,10 @@ public class AntColony {
 	public int getFood () {
 		return food;
 	}
+	public void reduceFood(int i){
+		
+		food=food-i;
+	}
 
 	/**
 	 * Increases the amount of available food
@@ -155,17 +161,22 @@ public class AntColony {
 	 *            The ant to place
 	 */
 	public void deployAnt (Place place, Ant ant) {
-		if (food >= ant.getFoodCost()) {
-			place.addInsect(ant);
-			if (place.getAnt()==ant){//j'ai modifi� cette fonction pour que la nourriture
-				food -= ant.getFoodCost();//ne soit consomm�e que lorsque l'insecte est vraiment ajout�
+		if (ant!=null && place!=null){
+			if (food >= ant.getFoodCost())  {
+				place.addInsect(ant);
+				if (place.getAnt()==ant){//j'ai modifi� cette fonction pour que la nourriture
+					food -= ant.getFoodCost();//ne soit consomm�e que lorsque l'insecte est vraiment ajout�
+				}
+				else {
+					System.out.println("Not enough food remains to place " + ant);
+				}
+				
 			}
 			
+		}
 			
-		}
-		else {
-			System.out.println("Not enough food remains to place " + ant);
-		}
+		
+		
 	}
 
 	/**

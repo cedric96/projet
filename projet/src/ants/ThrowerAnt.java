@@ -34,7 +34,7 @@ public class ThrowerAnt extends Ant {
 
 	@Override
 	public void action (AntColony colony) {
-		if (this.armor>0){//la throwerAnt ne fait une action que si son armor est superieur a 0
+		if (this.armor>0){
 			Bee target = getTarget();
 			if (target != null) {
 				target.reduceArmor(damage);

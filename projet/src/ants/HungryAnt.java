@@ -10,7 +10,7 @@ import core.Bee;
 
 public class HungryAnt extends Ant {
 	protected int damage;
-	protected int time=3;
+	protected int time=3; //Cooldown
 	
 	public HungryAnt(){
 		super(4,1);
@@ -20,8 +20,8 @@ public class HungryAnt extends Ant {
 	
 	public void action(AntColony colony){
 		Bee target_bee=place.getClosestBee(0, 0);
-		if (time>2){ // Temps de digestion de trois tours
-			if (target_bee!=null ){ // Verifie s'il y a une abeille ou pas
+		if (time>2){ 
+			if (target_bee!=null ){ 
 				damage=target_bee.getArmor();
 				target_bee.reduceArmor(damage+1);
 				time=0;

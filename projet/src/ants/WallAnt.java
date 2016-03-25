@@ -3,7 +3,8 @@ package ants;
 import core.Ant;
 import core.AntColony;
 
-/*FOURMI AYANT une grande valeur d'armure mais ne faisant rien comme action
+/**
+ * Fourmi ayant une grande valeur d'armure mais ne faisant rien comme action
 */
 public class WallAnt extends Ant {
 	

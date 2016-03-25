@@ -3,11 +3,15 @@ import core.AntColony;
 import core.Containing;
 import core.Ant;
 
+
+/**
+ * Fourmi qui se place sur une autre fourmi
+ * pour en modifier la valeur d'armure.
+ */
+
 public class BodyguardAnt extends Ant implements Containing {
 	
 	private Ant	fourmiContenue=null;
-	
-	
 	
 	public BodyguardAnt (){
 		
@@ -15,7 +19,7 @@ public class BodyguardAnt extends Ant implements Containing {
 		this.name="BodyG";
 				
 		
-		watersafe=true;//il peut resister a l'eau
+		watersafe=true;
 		if (fourmiContenue != null){
 			fourmiContenue.setPlace(this.place);
 		}
